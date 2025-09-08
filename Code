@@ -1,0 +1,23 @@
+def decision(im_sun, stay_home_sun, stay_home_rain, go_forest_sun, go_forest_rain):
+
+    im_rain = 1 - im_sun
+    
+    stay_home = stay_home_sun * im_sun + stay_home_rain * im_rain
+    go_forest = go_forest_sun * im_sun + go_forest_rain * im_rain
+    
+    if stay_home > go_forest:
+        print ("рекомендація залишитись вдома")
+        return stay_home
+    else: 
+        print ("рекомендація піти в ліс")
+        return go_forest
+    
+im_sun = float(input('Введіть ймовірність сонячної погоди:'))
+stay_home_rain = float(input('Ведіть оцінку дощу, коли ви вдома:'))
+stay_home_sun = float(input('Введіть оцінку сонця, коли ви вдома:'))
+go_forest_rain = float(input('Введіть оцінку дощу в лісі:'))
+go_forest_sun =float(input('Введіть оцінку сонця у лісі:'))
+    
+print(decision(im_sun, stay_home_sun, stay_home_rain, go_forest_sun, go_forest_rain))
+
+
