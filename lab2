@@ -1,0 +1,18 @@
+
+p_success1, profit_success1 = 0.6, 10
+p_fail1, profit_fail1 = 0.4, 0.5
+expected1 = p_success1 * profit_success1 + p_fail1 * profit_fail1
+
+p_success2, profit_success2 = 0.4, 10
+p_fail2, profit_fail2 = 0.6, 1
+expected2 = p_success2 * profit_success2 + p_fail2 * profit_fail2
+
+print(f"Очікуваний прибуток з 1 корпорацією: {expected1:.2f} млн$")
+print(f"Очікуваний прибуток з 2 корпорацією: {expected2:.2f} млн$")
+
+if expected1 > expected2:
+    print("Вигідніше тримати курс з 1 корпорацією.")
+elif expected2 > expected1:
+    print("Вигідніше тримати курс з 2 корпорацією.")
+else:
+    print("Обидва варіанти рівноцінні.")
