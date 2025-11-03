@@ -1,0 +1,84 @@
+import math
+
+def calculate_utility_task():
+    """
+    Розв'язує задачу №6 з теорії корисності.
+    """
+
+    def utility_function(x):
+        return 0.15 * (x ** 2)
+
+    initial_capital = 150.0  
+
+    print("--- Аналіз Варіанту А (Безпечний) ---")
+    
+    capital_A = initial_capital * (1 + 0.05)
+    utility_A = utility_function(capital_A)
+    
+    print(f"Кінцевий капітал (x_A): {capital_A:.2f} тис.")
+    print(f"Корисність (U_A): {utility_A:.4f}\n")
+
+    print("--- Аналіз Варіанту Б (Ризиковий) ---")
+    
+    prob_1 = 0.7
+    capital_B1 = initial_capital * (1 + 0.20)
+    utility_B1 = utility_function(capital_B1)
+    
+    print(f"Наслідок 1 (Успіх):")
+    print(f"  Кінцевий капітал (x_1): {capital_B1:.2f} тис.")
+    print(f"  Корисність U(x_1): {utility_B1:.4f}")
+    
+    prob_2 = 0.3
+    capital_B2 = initial_capital * (1 + 0.0)
+    utility_B2 = utility_function(capital_B2)
+    
+    print(f"\nНаслідок 2 (Невдача):")
+    print(f"  Кінцевий капітал (x_2): {capital_B2:.2f} тис.")
+    print(f"  Корисність U(x_2): {utility_B2:.4f}")
+    
+    expected_utility_B = (prob_1 * utility_B1) + (prob_2 * utility_B2)
+    
+    print(f"\nСподівана корисність (EU_B):")
+    print(f"  EU_B = (0.7 * {utility_B1:.4f}) + (0.3 * {utility_B2:.4f}) = {expected_utility_B:.4f}\n")
+
+    print("--- Висновок ---")
+    
+    print(f"U_A (Безпечний) = {utility_A:.4f}")
+    print(f"EU_B (Ризиковий) = {expected_utility_B:.4f}")
+    
+    if expected_utility_B > utility_A:
+        print(">>> Доцільніше обрати Варіант Б (Ризиковий), оскільки його сподівана корисність вища.\n")
+    else:
+        print(">>> Доцільніше обрати Варіант А (Безпечний), оскільки його корисність вища.\n")
+
+    print("--- Розрахунок премії за ризик (π) ---")
+    
+    expected_value_B = (prob_1 * capital_B1) + (prob_2 * capital_B2)
+    print(f"1. Сподіваний виграш (x_bar):")
+    print(f"   x_bar = (0.7 * {capital_B1:.2f}) + (0.3 * {capital_B2:.2f}) = {expected_value_B:.4f} тис.")
+
+    certainty_equivalent = math.sqrt(expected_utility_B / 0.15)
+    print(f"2. Детермінований еквівалент (x_tilde):")
+    print(f"   U(x_tilde) = {expected_utility_B:.4f}")
+    print(f"   0.15 * x_tilde^2 = {expected_utility_B:.4f}")
+    print(f"   x_tilde = sqrt({expected_utility_B:.4f} / 0.15) = {certainty_equivalent:.4f} тис.")
+    
+    risk_premium = expected_value_B - certainty_equivalent
+    print(f"3. Премія за ризик (π = x_bar - x_tilde):")
+    print(f"   π = {expected_value_B:.4f} - {certainty_equivalent:.4f} = {risk_premium:.4f} тис.")
+    
+    print("\nЕкономічна суть:")
+    if risk_premium < 0:
+        print(f"Премія за ризик від'ємна ({risk_premium:.4f} тис.).")
+        print("Це означає, що підприємство СХИЛЬНЕ ДО РИЗИКУ (risk-seeker).")
+        print(f"Воно готове \"доплатити\" {abs(risk_premium):.4f} тис. ($ {abs(risk_premium) * 1000:.0f})")
+        print("або відмовитись від цієї суми гарантованого доходу,")
+        print("лише за те, щоб мати можливість взяти участь у ризиковій грі.")
+    else:
+        print(f"Премія за ризик додатна ({risk_premium:.4f} тис.).")
+        print("Це означає, що підприємство НЕСХИЛЬНЕ ДО РИЗИКУ (risk-averse).")
+        print(f"Воно готове відмовитись від {risk_premium:.4f} тис. очікуваного прибутку,")
+        print("щоб отримати гарантований результат замість ризику.")
+
+
+calculate_utility_task()
